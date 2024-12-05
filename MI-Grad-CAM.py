@@ -63,4 +63,5 @@ def generate_grad_mi_cam(model, img, last_conv_layer_name, pred_index=None):
         final_output = final_output + (combined_weights_list[i] * np.array(upsampled_feature_map_1[:,:,:,i]))
     final_output_resized = np.squeeze(final_output)
     smoothed_cam = smoothen_cam(final_output_resized, 'gaussian', kernel_size=11, sigma=7)
+    smoothed_cam = np.max(smoothed_cam, 0)  
     return smoothed_cam 
